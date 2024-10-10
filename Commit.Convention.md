@@ -5,11 +5,13 @@
 # 커밋 작성 원칙
 
 - 커밋 메세지는 다음과 같은 형식과 규칙을 따른다.  
-`[Icon]<type>: #{Issue 번호} <subject>
-<body>  
-<BLANK LINE>  
-<footer>`
+  `[Icon]<type>: #{Issue 번호} <subject>`  
+  `<body>`  
+  `<BLANK LINE>`  
+  `<footer>`
+
 - 작업 완료 후 `full request` 커밋 시 #{Issue 번호} 앞에 `Closes`를 붙여 이슈를 클로징한다.
+
 - `Type` 유형은 아래와 같다.
 
 # 커밋 메시지 타입 (Icon - Type)

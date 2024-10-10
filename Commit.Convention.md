@@ -1,14 +1,16 @@
-# 설명 
-- 협업 간 커밋 스타일을 일관되게 유지하고 프로젝트 버전 관리를 용이하게 하기 위해 본 컨벤션을 작성하였다. 
+# 설명
 
-# 커밋 작성 원칙 
-- 커밋 메세지는 다음과 같은 형식과 규칙을 따른다. 
+- 협업 간 커밋 스타일을 일관되게 유지하고 프로젝트 버전 관리를 용이하게 하기 위해 본 컨벤션을 작성하였다.
+
+# 커밋 작성 원칙
+
+- 커밋 메세지는 다음과 같은 형식과 규칙을 따른다.  
 `[Icon]<type>: #{Issue 번호} <subject>
-<body>
-<BLANK LINE>
+<body>  
+<BLANK LINE>  
 <footer>`
-- 작업 완료 후 `full request` 커밋 시 #{Issue 번호} 앞에 `Closes`를 붙여 이슈를 클로징한다. 
-- `Type` 유형은 아래와 같다. 
+- 작업 완료 후 `full request` 커밋 시 #{Issue 번호} 앞에 `Closes`를 붙여 이슈를 클로징한다.
+- `Type` 유형은 아래와 같다.
 
 # 커밋 메시지 타입 (Icon - Type)
 
@@ -53,26 +55,30 @@
 🌍 다국어 지원 추가/수정: i18n  
 📊 분석 기능 추가/수정: analytics  
 🌱 초기 데이터 seeding 추가/수정: seeds  
-📦 종속성을 추가하거나 제거할 때: deps  
+📦 종속성을 추가하거나 제거할 때: deps
 
 # Subject (주제)
+
 - 커밋의 목적을 간결하게 설명한다.
 - 타입 첫 글자는 대문자로 작성한다.
 - 50자 이내로 작성한다.
 
 # Body (본문)
+
 - 커밋의 상세 내용을 작성한다.
-- 여러 줄로 작성할 수 있으나 한줄당 72자 이내로 작성한다. 
-- 양에 구애받지 않고 최대한 상세히 기술한다. 
-- 어떻게 변경했는지 보다는 무엇을 변경했는지 또는 왜 변경했지는지를 기술한다. 
-- 선택사항 
+- 여러 줄로 작성할 수 있으나 한줄당 72자 이내로 작성한다.
+- 양에 구애받지 않고 최대한 상세히 기술한다.
+- 어떻게 변경했는지 보다는 무엇을 변경했는지 또는 왜 변경했지는지를 기술한다.
+- 선택사항
 
 # Footer (후기)
+
 - 참고한 문서나 추가적인 정보를 작성한다.
 - 선택 사항
 
 # 참고 문헌
+
 - 본 컨벤션 전략 구성에 도움을 주신 개발자분에게 감사드립니다.  
-[https://github.com/Team-MMMin/Turn-basedRPG/issues/9](url)  
-[https://hyunjun.kr/21](url)  
-[https://velog.io/@archivvonjang/Git-Commit-Message-Convention](url)  
+  [https://github.com/Team-MMMin/Turn-basedRPG/issues/9](url)  
+  [https://hyunjun.kr/21](url)  
+  [https://velog.io/@archivvonjang/Git-Commit-Message-Convention](url)

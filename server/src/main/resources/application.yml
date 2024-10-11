@@ -1,0 +1,61 @@
+spring:
+  application:
+    name=goose
+  datasource:
+    hikari:
+      maximum-pool-size: 4
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: 1234
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  profiles:
+    active: dev
+  data:
+    redis:
+      host: localhost
+      port: 6379
+  graphql:
+    graphiql:
+      enabled: true # graphiql을 통해 테스트 가능 여부 (localhost:8080/graphiql)
+      printer:
+        enabled: true # show-sql와 같이 graphql 콘솔에 쿼리 출력
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: igoose.kok@gmail.com
+    password: vslcuxlihyoziykf
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+jwt:
+  secret: k8V33RnESVDia+zzbb6nxAEap235hBDDeiHNug7byPog5M6tDX/20zKieRh63pGFskudazOBnrIpy5e3DPEa5w==
+  access-token-expiration: 600000 # 10분
+  refresh-token-expiration: 1209600000  # 2주
+  email-token-expiration: 300000  # 5분
+
+logging:
+  level:
+    org:
+      org.springframework.security: DEBUG
+#      hibernate: DEBUG
+#      springframework:
+#        data: DEBUG
+mybatis:
+  mapper-locations: classpath:mapper/**/*.xml
+  type-aliases-package: com.example.goose.iGoose.**.vo
+
+
+
+

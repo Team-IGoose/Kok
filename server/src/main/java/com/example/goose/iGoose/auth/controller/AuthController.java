@@ -82,7 +82,7 @@ public class AuthController {
     public ResponseEntity<?> verifyEmail(@RequestBody VerificationRequest verificationRequest) throws Exception {
 
         try {
-            authService.verifyEmail(verificationRequest.getMethod(), verificationRequest.getCode());
+            authService.verifyEmail(verificationRequest);
             return ResponseEntity.ok("이메일 인증 성공");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());

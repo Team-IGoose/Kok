@@ -1,9 +1,11 @@
 package com.example.goose.iGoose.auth.mapper;
 
 
+import com.example.goose.iGoose.auth.request.VerificationRequest;
 import com.example.goose.iGoose.auth.response.VerificationResponse;
 import com.example.goose.iGoose.auth.request.UserInfoRequest;
 import com.example.goose.iGoose.auth.vo.UserVO;
+import com.example.goose.iGoose.auth.vo.VerificationVO;
 import org.apache.ibatis.annotations.*;
 
 import java.util.Date;
@@ -20,12 +22,12 @@ public interface AuthMapper {
 
     /**
      * 이메일 인증 요청 api
-     * @param verificationResponse
+     * @param verificationVO
      * @throws Exception
      */
-    @Insert("INSERT INTO \"VERIFICATION\" (uuid, method, expire, code)" +
-            " VALUES (#{uuid}, #{method}, now(), #{code})")
-    void emailVerification(VerificationResponse verificationResponse) throws Exception;
+    @Insert("INSERT INTO \"VERIFICATION\" (uuid, method, expire, code,is_verified)" +
+            " VALUES (#{uuid}, #{method}, now(), #{code}, #{is_verified})")
+    void emailVerification(VerificationVO verificationVO) throws Exception;
 
     /**
      * id로 유저 정보 검색
@@ -61,6 +63,15 @@ public interface AuthMapper {
     @Select("SELECT COUNT(*) FROM VERIFICATION WHERE method = #{method}")
     boolean existsByMethod(String method);
 
+
+    /**
+     * method를 이용해 verification 테이블 검색
+     * @param method
+     * @return
+     */
+    @Select("SELECT * FROM \"VERIFICATION\" WHERE method = #{method}")
+    VerificationVO findByMethod(String method);
+
     /**
      * uuid로 유저 정보 검색
      * @param uuid
@@ -80,17 +91,23 @@ public interface AuthMapper {
 
     /**
      * email인증 여부 수정
-     * @param verificationResponse
+     * @param uuid
      */
-    @Update("UPDATE \"USER_VERIFICATION\" SET is_verified = true, email_verification = #{email_verification} WHERE uuid = #{uuid}")
-    void updateEmailVerified(VerificationResponse verificationResponse) throws Exception;
+    @Update("UPDATE \"VERIFICATION\" SET is_verified = true, code = #{code} WHERE uuid = #{uuid}")
+    void updateEmailVerified(String uuid) throws Exception;
+
+    @Update("UPDATE \"VERIFICATION\" SET code = #{code} , expire = now() WHERE uuid = #{uuid}")
+    void updateVerificationCode(VerificationVO verificationVO) throws Exception;
 
     /**
-     * 이메일 인증 코드 만료시 임시 저장한 사용자 정보 삭제
+     * 첫 인증 하지 않고 이메일 인증 코드 만료시 임시 저장한 사용자 정보 삭제
      * @param expirationTime
      */
-    @Delete("DELETE FROM \"USER_VERIFICATION\" WHERE is_verified = false AND expire < #{expirationTime}")
+    @Delete("DELETE FROM \"VERIFICATION\" WHERE is_verified = false AND expire < #{expirationTime}")
     void deleteExpiredUsers(Date expirationTime);
+
+    @Delete("DELETE FROM \"VERIFICATION\" WHERE uuid = #{uuid}")
+    void deleteVerification(String uuid) throws Exception;
 
     /**
      * uuid로 유저 정보 업데이트

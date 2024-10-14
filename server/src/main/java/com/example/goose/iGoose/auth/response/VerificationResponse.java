@@ -15,5 +15,6 @@ public class VerificationResponse {
     private String uuid;
     private String method;
     private Date expire;
+    private Boolean is_verified;
     private String code;
 }

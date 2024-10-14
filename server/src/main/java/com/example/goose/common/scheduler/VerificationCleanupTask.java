@@ -25,4 +25,16 @@ public class VerificationCleanupTask {
 
         authMapper.deleteExpiredUsers(calendar.getTime());
     }
+
+    @Scheduled(cron = "0 * * * * ?")
+    public void cleanupExpiredVerifiedUsers() {
+        Date now = new Date();
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(now);
+        calendar.add(Calendar.MINUTE, -30);
+
+        authMapper.deleteExpiredUsers(calendar.getTime());
+    }
+
 }

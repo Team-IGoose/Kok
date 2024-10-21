@@ -1,7 +1,7 @@
-package com.example.kok.controller
+package com.igoose.kok.controller
 
-import com.example.kok.model.WebPage
-import com.example.kok.view.WebViewActivity
+import com.igoose.kok.model.WebPage
+import com.igoose.kok.view.WebViewActivity
 
 
 class WebViewController(private val activity: WebViewActivity) {

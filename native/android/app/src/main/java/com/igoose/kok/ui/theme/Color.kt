@@ -1,4 +1,4 @@
-package com.example.kok.ui.theme
+package com.igoose.kok.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

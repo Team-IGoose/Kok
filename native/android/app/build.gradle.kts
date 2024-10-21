@@ -8,7 +8,7 @@ android {
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.kok"
+        applicationId = "com.igoose.kok"
         minSdk = 24
         targetSdk = 34
         versionCode = 1

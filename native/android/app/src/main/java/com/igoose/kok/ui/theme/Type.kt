@@ -1,4 +1,4 @@
-package com.example.kok.ui.theme
+package com.igoose.kok.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

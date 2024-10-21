@@ -1,4 +1,4 @@
-package com.example.kok.view
+package com.igoose.kok.view
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -6,7 +6,7 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.appcompat.app.AppCompatActivity
 import com.example.kok.R
-import com.example.kok.controller.WebViewController
+import com.igoose.kok.controller.WebViewController
 
 class WebViewActivity : AppCompatActivity() {
     private lateinit var webView: WebView

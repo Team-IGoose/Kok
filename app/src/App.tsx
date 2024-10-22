@@ -19,3 +19,6 @@ export default App;
 // type config에 따른 절대, 상대경로 구분
 //디렉터리 기본 인덱스 호출
 // 객체 인터페이스와 타입
+// lighthouse
+
+//절대 경로 설정은 tsconfig + vite config로 이루어져야 함.

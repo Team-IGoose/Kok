@@ -18,7 +18,15 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+
+    /* 경로 설정 */
+    "baseUrl": ".", // 프로젝트 루트 경로
+    "paths": {
+      "@domain/*": ["src/_domain/*"],
+      "@assets/*": ["src/common/assets/*"],
+      "@constant/*": ["src/common/constant/*"]
+    }
   },
   "include": ["src", "vitest.config.ts"]
 }

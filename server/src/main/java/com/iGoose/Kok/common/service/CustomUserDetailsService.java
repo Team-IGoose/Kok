@@ -31,7 +31,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
 
         return org.springframework.security.core.userdetails.User.builder()
-                .username(userVO.getId())
+                .username(userVO.getEmail() != null ? userVO.getEmail() : userVO.getPhone_number())
                 .password(userVO.getPassword())  // Ensure this is the encrypted password
 //                .roles("USER")  // Replace with actual roles if needed
                 .build();

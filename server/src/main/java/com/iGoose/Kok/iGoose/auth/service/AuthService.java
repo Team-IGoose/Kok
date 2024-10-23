@@ -16,6 +16,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Random;
 import java.util.Date;
@@ -33,6 +34,7 @@ public class AuthService {
     private final JwtTokenProvider jwtTokenProvider;
     private final RefreshTokenService refreshTokenService;
     private final JavaMailSender mailSender;
+    private final ImageService imageService;
 
 
     // ID 중복 체크
@@ -41,7 +43,7 @@ public class AuthService {
      * ID가 존재하면 true값 반환
      */
     public boolean isIdDuplicate(UserVO userVO) {
-        return authMapper.countById(userVO.getId()) > 5;
+        return authMapper.countById(userVO.getUser_name()) > 0;
     }
 
     /**
@@ -52,14 +54,16 @@ public class AuthService {
     }
 
     // 회원가입 로직
-    public ResponseEntity<?> signup(UserVO userVO) throws Exception {
-        String verificationCode = generateVerificationCode();
+    public void signup(UserVO userVO, MultipartFile file) throws Exception {
 
         userVO.setUuid(UUID.randomUUID().toString());
         userVO.setPassword(passwordEncoder.encode(userVO.getPassword())); // 비밀번호 암호화
-        authMapper.insertUser(userVO);
 
-        return ResponseEntity.ok("회원가입 완료!");
+        if (file != null && !file.isEmpty()) {
+            String imageUrl = imageService.saveImage(file);
+            userVO.setProfile(imageUrl);
+        }
+        authMapper.insertUser(userVO);
     }
 
     /**
@@ -138,7 +142,7 @@ public class AuthService {
 
     // 로그인 로직
     public ResponseEntity<?> login(LoginRequest loginRequest) throws Exception {
-        UserVO user = authMapper.findById(loginRequest.getId()); // 로그인할때 입력한 Id 값으로 유저 정보 검색
+        UserVO user = authMapper.findByEmail(loginRequest.getMethod()); // 로그인할때 입력한 Id 값으로 유저 정보 검색
 
         // 암호화 한 password 비교
         if (user != null && passwordEncoder.matches(loginRequest.getPassword(), user.getPassword())) {

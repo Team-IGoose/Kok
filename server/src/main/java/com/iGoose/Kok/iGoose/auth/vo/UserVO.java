@@ -19,9 +19,7 @@ public class UserVO implements UserDetails {
 
     private String uuid;
 
-    private String id;
-
-    private String name;
+    private String user_name;
 
     private String password;
 
@@ -65,6 +63,6 @@ public class UserVO implements UserDetails {
 
     @Override
     public String getUsername() {
-        return this.id;
+        return this.user_name;
     }
 }

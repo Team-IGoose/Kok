@@ -1,7 +1,6 @@
 package com.iGoose.Kok.iGoose.auth.mapper;
 
 
-import com.iGoose.Kok.iGoose.auth.response.VerificationResponse;
 import com.iGoose.Kok.iGoose.auth.request.UserInfoRequest;
 import com.iGoose.Kok.iGoose.auth.response.VerificationUserInfoResponse;
 import com.iGoose.Kok.iGoose.auth.vo.UserVO;
@@ -18,8 +17,8 @@ public interface AuthMapper {
      * @param userVO
      * @throws Exception
      */
-    @Insert("INSERT INTO \"USER\" (uuid, id, name, password, pronoun, intro, gender, status, profile, feeling, is_professional, revenue_status, created, updated,email, phone_number, email_verified, phone_verified" +
-            " VALUES (#{uuid}, #{id}, #{name}, #{password}, #{pronoun}, #{intro}, #{gender}, #{status}, #{profile}, #{feeling}, #{is_professional}, #{revenue_status}, now(), now(), #{email}, #{phone_number}, #{email_verified}, #{phone_verified})")
+    @Insert("INSERT INTO \"USER\" (uuid, user_name, password, pronoun, intro, gender, status, profile, feeling, is_professional, revenue_status, created, updated,email, phone_number, email_verified, phone_verified)" +
+            " VALUES (#{uuid}, #{user_name}, #{password}, #{pronoun}, #{intro}, #{gender}, #{status}, #{profile}, #{feeling}, #{is_professional}, #{revenue_status}, now(), now(), #{email}, #{phone_number}, #{email_verified}, #{phone_verified})")
     void insertUser(UserVO userVO) throws Exception;
 
     /**
@@ -32,21 +31,21 @@ public interface AuthMapper {
     void emailVerification(VerificationVO verificationVO) throws Exception;
 
     /**
-     * id로 유저 정보 검색
-     * @param id
+     * user_name로 유저 정보 검색
+     * @param user_name
      * @return
      * @throws Exception
      */
-    @Select("SELECT * FROM \"USER\" WHERE \"id\" = #{id}")
-    UserVO findById(String id) throws Exception;
+    @Select("SELECT * FROM \"USER\" WHERE \"user_name\" = #{user_name}")
+    UserVO findById(String user_name) throws Exception;
 
     /**
      * id 중복 검사
-     * @param id
+     * @param user_name
      * @return
      */
-    @Select("SELECT COUNT(*) FROM \"USER\" WHERE \"id\" = #{id}")
-    int countById(String id);
+    @Select("SELECT COUNT(*) FROM \"USER\" WHERE \"user_name\" = #{user_name}")
+    int countById(String user_name);
 
     /**
      * email 중복 검사

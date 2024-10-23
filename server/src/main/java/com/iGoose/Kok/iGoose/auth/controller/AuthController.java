@@ -6,11 +6,13 @@ import com.iGoose.Kok.iGoose.auth.request.LoginRequest;
 import com.iGoose.Kok.iGoose.auth.request.VerificationRequest;
 import com.iGoose.Kok.iGoose.auth.response.VerificationUserInfoResponse;
 import com.iGoose.Kok.iGoose.auth.service.AuthService;
+import com.iGoose.Kok.iGoose.auth.service.ImageService;
 import com.iGoose.Kok.iGoose.auth.vo.UserVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/auth")
@@ -21,8 +23,15 @@ public class AuthController {
 
     // 회원가입 API
     @PostMapping("/signup")
-    public ResponseEntity<?> signup(@RequestBody UserVO userVO) throws Exception {
-        return authService.signup(userVO);
+    public ResponseEntity<?> signup(@RequestPart("user") UserVO userVO,
+                                    @RequestPart(value = "file", required = false) MultipartFile file) throws Exception {
+        try {
+            // Pass both userVO and file to the service layer
+            authService.signup(userVO, file);
+            return ResponseEntity.ok("회원가입 성공");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("회원가입 실패: " + e.getMessage());
+        }
     }
 
 

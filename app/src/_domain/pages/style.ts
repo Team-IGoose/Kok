@@ -10,6 +10,7 @@ export const Container = styled(Box)(({ theme }) => ({
   height: '2rem',
   width: '100%',
   padding: theme.spacing(2),
+  boxSizing: 'border-box',
 }));
 
 // 입력 필드 스타일

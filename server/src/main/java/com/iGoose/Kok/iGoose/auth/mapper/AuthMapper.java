@@ -90,6 +90,8 @@ public interface AuthMapper {
     @Select("SELECT * FROM \"USER\" WHERE email = #{method} OR phone_number = #{method}")
     UserVO findByEmail(String method);
 
+    @Select("SELECT * FROM \"USER\" WHERE (email = #{method} OR phone_number = #{method}) AND user_name = #{user_name}")
+    UserVO findByMethodAndUser_name(String method, String user_name) throws Exception;
 
     /**
      * 이메일 또는 전화번호로 user_name, profile 조회

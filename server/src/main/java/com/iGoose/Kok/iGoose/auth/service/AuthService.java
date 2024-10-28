@@ -18,6 +18,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Objects;
 import java.util.Random;
 import java.util.Date;
 
@@ -140,12 +141,17 @@ public class AuthService {
         return result;
     }
 
-    // 로그인 로직
+    /**
+     * 로그인 로직
+     * @param loginRequest
+     * @return
+     * @throws Exception
+     */
     public ResponseEntity<?> login(LoginRequest loginRequest) throws Exception {
-        UserVO user = authMapper.findByEmail(loginRequest.getMethod()); // 로그인할때 입력한 Id 값으로 유저 정보 검색
+        UserVO user = authMapper.findByMethodAndUser_name(loginRequest.getMethod(), loginRequest.getUser_name()); // 로그인할때 입력한 Id 값으로 유저 정보 검색
 
         // 암호화 한 password 비교
-        if (user != null && passwordEncoder.matches(loginRequest.getPassword(), user.getPassword())) {
+        if (user != null && passwordEncoder.matches(loginRequest.getPassword(), user.getPassword()) && Objects.equals(loginRequest.getUser_name(), user.getUser_name())) {
 
             String accessToken = jwtTokenProvider.generateAccessToken(user.getUuid());
             String refreshToken = jwtTokenProvider.generateRefreshToken(user.getUuid());
@@ -159,7 +165,7 @@ public class AuthService {
 
             return ResponseEntity.ok()
                     .header("Authorization", encryptedToken)
-                    .body("로그인 성공");
+                    .body(user);
         } else {
             return ResponseEntity.status(401).body("로그인 실패");
         }
